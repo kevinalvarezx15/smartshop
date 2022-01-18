@@ -4,12 +4,12 @@
  
 {% block content %}
  <div class="col-md-12" style="height: 200px;" >
-        <h1 style=" text-align: center; margin-top: 20px; margin-bottom: 20px;">Clientes</h1>
+        <h1 style=" text-align: left; margin-top: 20px; margin-bottom: 10px;">Clientes</h1>
         
-        <div style="position: absolute; z-index: 1; right: 10px; top: 100px;" >
+        <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
             <button onclick="openPopup('{% url 'crearCliente' %}')" class="btn btn-primary">Crear</button>  
             <button onclick="openEdit()" class="btn btn-primary">Modificar</button>
-            <button onclick="" class="btn btn-primary">Eliminar</button>
+            <button onclick="deleteRegister()" class="btn btn-primary">Eliminar</button>
             <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
         </div>
             <table id="example" class="table table-striped table-bordered" style="width:100%;">
@@ -213,6 +213,19 @@
         $('#edicion').load(url,function(){
             $(this).modal('show');
         });
+    }
+    function deleteRegister(){
+      var table = $("#example").DataTable();      
+      if(table.rows('.selected').data().length>0){
+        if (confirm("¿Esta seguro que desea eliminar este registro?")) {
+        alert('Se a eliminado correctamente');
+        }
+
+      }else{
+        alert( 'Primero debe seleccionar el registro que desea eliminar' );
+      }
+      
+
     }
     function openEdit(){
         var table = $("#example").DataTable();
