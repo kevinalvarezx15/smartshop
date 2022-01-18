@@ -1,42 +1,29 @@
 {% extends "basegrid.html" %}
  
-{% block title %}Clientes{% endblock title %}
+{% block title %}Tipo Productos {% endblock title %}
  
 {% block content %}
  <div class="col-md-12" style="height: 200px;" >
-        <h4>Clientes</h4> 
-        <div style="position: absolute;!important;z-index: 1;">
-            <button onclick="openPopup('{% url 'crearCliente' %}')" class="btn btn-primary">Crear</button>  
+        <h1 style=" text-align: left; margin-top: 20px; margin-bottom: 10px;">Tipo Productos</h1>
+        
+        <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+            <button onclick="openPopup('{% url 'crearTipo' %}')" class="btn btn-primary">Crear</button>  
             <button onclick="openEdit()" class="btn btn-primary">Modificar</button>
-            <button onclick="" class="btn btn-primary">Eliminar</button>
-            <button onclick="" class="btn btn-primary">Buscar</button>
+            <button onclick="deleteRegister()" class="btn btn-primary">Eliminar</button>
+            <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
         </div>
             <table id="example" class="table table-striped table-bordered" style="width:100%;">
                 <thead>
-                    
-                    <th>Codigo</th>
+                    <th>IdCategoriaProducto</th>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                 </thead>
+                    <th>Descripcion</th>
+                        
+                </thead>
                 <tbody>
                     <tr>
-                        <td>1002136</td>
-                        <td>Kevin</td>
-                        <td>Alvarez</td>
-                        
-                    
-                    </tr>
-                    <tr>
-                        <td>1005424</td>
-                        <td>Carlos</td>
-                        <td>Builes</td>
-                        
-                       
-                    </tr>
-                    <tr>
-                        <td>516623</td>
-                        <td>Andres</td>
-                        <td>Echavarria</td>
+                        <td>1005</td>
+                        <td>Audifonos </td>
+                        <td>Productos de Audio </td>
                         
                     </tr>
                     
@@ -53,43 +40,31 @@
             <div class="modal-content">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Cliente</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Tipo Producto</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!--Formulario-->
                     <form method="POST" class="post-form" action="/addnew">  
-                        {% csrf_token %}  
-                       <div class="container">  
-                      <br>
-                      <!--Almacenar Id-->
-                      <input type="hidden" id="IdTipo" name="IdTipo"> 
-
-                       <div class="form-group row">  
-                       <label class="col-sm-1 col-form-label"></label>  
-                       <div class="col-sm-4">  
-                       <h3>Ingrese los detalles</h3>  
-                       </div>  
-                        </div>  
-                       <div class="form-group row">  
-                       <label class="col-sm-2 col-form-label">Nombre:</label>  
-                       <div class="col-sm-4">  
-                         <input class="form-control" type="text" placeholder="Nombre" name="nombre" required="true" />
-                       </div> 
-                       </div>
-                       <div class="form-group row">  
-                       <label class="col-sm-2 col-form-label">Descripción:</label>  
-                       <div class="col-sm-4"> 
-                         <textarea class="form-control" placeholder="Descripción"></textarea> 
-                       </div>  
-                        </div>  
-                        
-                       <div class="form-group row">  
-                       <label class="col-sm-1 col-form-label"></label>  
-                     
-                        </div>  
-                       </div>  
-                      </form>   
+                      <div class="container">  
+                         <div class="form-group row">  
+                           <label class="col-sm-2 col-form-label">Id categoria:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="number" placeholder="idcategoria" name="idcategoria" required="true" /> 
+                           </div>
+                           <label class="col-sm-2 col-form-label">Nombre:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="text" placeholder="nombre" name="nombre" required="true" /> 
+                           </div>
+                           <br>
+                           <br>
+                           <br>
+                             <label class="col-sm-2 col-form-label">Descripcion:</label>  
+                             <div class="col-sm-4">  
+                               <input class="form-control" type="text" placeholder="Descripcion" name="Descripcion" required="true" />
+                             
+                      </div>  
+                     </form> 
                   <!--Fin Formulario-->
                 </div>
                 <div class="modal-footer">
@@ -109,41 +84,53 @@
     var editor;
     var selectArray="";
     var $=jQuery.noConflict();
+
+    var visible=0;
+    function openBuscar()
+    {
+        if(visible==0){
+            document.getElementsByClassName("dataTables_filter")[0].style.visibility='visible';
+            
+            visible=1;
+        }
+        else{
+            $('#example').DataTable().search( "" ).draw();
+            document.getElementsByClassName("dataTables_filter")[0].style.visibility='hidden';
+            visible=0;
+        }
+    }
+
     function openPopup(url){
         $('#edicion').load(url,function(){
             $(this).modal('show');
         });
     }
+    function deleteRegister(){
+      var table = $("#example").DataTable();      
+      if(table.rows('.selected').data().length>0){
+        if (confirm("¿Esta seguro que desea eliminar este registro?")) {
+        alert('Se a eliminado correctamente');
+        }
+
+      }else{
+        alert( 'Primero debe seleccionar el registro que desea eliminar' );
+      }
+      
+
+    }
     function openEdit(){
         var table = $("#example").DataTable();
         if(table.rows('.selected').data().length>0){
-            var Cedula = table.rows('.selected').data()[0][0];
+            var Idcategoriaproducto = table.rows('.selected').data()[0][0];
             var Nombre = table.rows('.selected').data()[0][1];
-            var Apellido = table.rows('.selected').data()[0][2];
-            var TipoPersona = table.rows('.selected').data()[0][3];
-            var TipoDocumento = table.rows('.selected').data()[0][4];
-            var Celular = table.rows('.selected').data()[0][5];
-            var Correo = table.rows('.selected').data()[0][6];
-            var Departamento = table.rows('.selected').data()[0][7];
-            var Municipio = table.rows('.selected').data()[0][8];
-            var Direccion = table.rows('.selected').data()[0][9];
-            var NombreContacto = table.rows('.selected').data()[0][10];
-            var TelefonoContacto = table.rows('.selected').data()[0][11];
+            var Descripcion = table.rows('.selected').data()[0][2];
 
             //var url="{% url 'EditarCliente' 2  %}"
-            $('select[name="TipoPersona"]').val(TipoPersona);
-            $('select[name="TipoDocumento"]').val(TipoDocumento);
-            $('input[name="IdTipo"]').val(Nombre);
-            $('input[name="apellido"]').val(Apellido);
-            $('input[name="documento"]').val(Cedula);
-            $('input[name="celular"]').val(Celular);
-            $('input[name="email"]').val(Correo);
-            $('input[name="direccion"]').val(Direccion);
-            $('input[name="nombreContacto"]').val(NombreContacto);
-            $('input[name="telefonoContacto"]').val(TelefonoContacto);
-            $('select[name="departamento"]').val(Departamento);
-            $('select[name="municipio"]').val(Municipio);
+            $('input[name="idcategoria"]').val(Idcategoriaproducto);
+            $('input[name="nombre"]').val(Nombre);
+            $('input[name="descripcion"]').val(Descripcion);
 
+            
             // $('#edicion').load(url,function(){
             $('#edicion').modal('show');
             //});

@@ -6,6 +6,7 @@ urlpatterns =[
     path('Crear',views.addnew, name='crear'),
     path('CreaTipo',views.addnewTipoProducto, name='crearTipo'),
     path('TipoProducto',views.cargar_TipoProducto, name='tipoProducto'),
+
     # path('registro/',views.cargar_registro, name='registro'),
     
 ]
