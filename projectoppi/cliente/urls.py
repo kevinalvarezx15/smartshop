@@ -4,7 +4,7 @@ from . import views
 urlpatterns =[
     path('',views.cargar_cliente, name='cliente'),
     path('Crear',views.addnew, name='crearCliente'),
-    path('Editar/<int:id>/<var:nombre:>',views.editCliente, name='EditarCliente'),
+    path('Editar/<int:id>',views.editCliente, name='EditarCliente'),
     # path('registro/',views.cargar_registro, name='registro'),
     
 ]
