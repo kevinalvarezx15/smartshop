@@ -1,42 +1,331 @@
 {% extends "basegrid.html" %}
  
-{% block title %}Employee Records{% endblock title %}
+{% block title %}Proveedores{% endblock title %}
  
 {% block content %}
- <div class="col-md-12">
-        <h4>Proveedores</h4> <span><a href="{% url 'crearProveedor' %}" class="btn btn-primary">Crear</a></span>  
-        <div class="table-responsive">
-  <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
-            <thead>
-                <th>Documento</th>
-                <th>Tipo persona</th>
-                <th>Tipo documento</th>
-                <th>Nombre</th>
-                <th>Correo electronico</th>
-                <th>Celular</th>
-                <th>Dirección</th>
-                <th>Pais</th>
-                <th>Departamento</th>
-                <th>Municipio</th>
-             </thead>
-   <tbody>
-    <tr>
-        <td>1002136</td>
-        <td>Kevin</td>
-        <td>Alvarez</td>
-        <td>Natural</td>
-        <td>Cedula</td>
-        <td>314425456</td>
-        <td>alvarezke@gmsd.co</td>
-        <td>Antioquia</td>
-        <td>Medellin</td>
-        <td>cr 45 # 102 - 45</td>
-    
-    </tr>
- 
-   </tbody>
-         
-  </table>
+ <div class="col-md-12" style="height: 200px;" >
+        <h1 style=" text-align: left; margin-top: 20px; margin-bottom: 10px;">Proveedores</h1>
+        
+        <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+            <button onclick="openPopup('{% url 'crearProveedor' %}')" class="btn btn-primary">Crear</button>  
+            <button onclick="openEdit()" class="btn btn-primary">Modificar</button>
+            <button onclick="deleteRegister()" class="btn btn-primary">Eliminar</button>
+            <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
+        </div>
+            <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                <thead>
+                    <th>Documento</th>
+                    <th>TipoPersona</th>
+                    <th>TipoDocumento</th>
+                    <th>Nombre </th>
+                    <th>Correo Electronico</th>
+                    <th>Celular</th>
+                    <th>Direccion </th>
+                    <th>Pais </th>
+                    <th>Departamento</th>
+                    <th>Municipio</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1000757741</td>
+                        <td>Natural</td>
+                        <td>CC</td>
+                        <td>Importadora Efectiva</td>
+                        <td>Importadora@gmail.com</td>
+                        <td>3128520321</td>
+                        <td>Calle 67 # 40-54</td>
+                        <td>Colombia</td>
+                        <td>Antioquia </td>
+                        <td>Medellin </td>
+                        
+                    
+                    </tr>
+                    
+                    
+                </tbody>
+               
+            </table>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="edicion" role="dialog" role="dialog">
+        
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Proveedor</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--Formulario-->
+                    <form method="POST" class="post-form" action="/addnew">  
+                      <div class="container">  
+                         <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Documento:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="number" placeholder="Documento" name="documento" required="true" />
+                           </div>    
+                           
+                           <label class="col-sm-2 col-form-label">Correo electronico:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="text" placeholder="Correo electronico" name="email" required="true" />
+                           </div>  
+                         </div>
+                         <div class="form-group row">  
+                           <label class="col-sm-2 col-form-label">Tipo documento:</label>  
+                           <div class="col-sm-4">  
+                             <select class="form-control" name="cars" id="cars">
+                               <option value="volvo">Cedula</option>
+                               <option value="saab">Pasaporte</option>
+                             </select>   
+                           </div>
+                           <label class="col-sm-2 col-form-label">Tipo Persona:</label>  
+                           <div class="col-sm-4">  
+                             <select class="form-control" name="cars" id="cars">
+                               <option value="volvo">Natural </option>
+                               <option value="saab">Juridica</option>
+                             </select>   
+                           </div>
+                           
+                         </div>
+           
+                         <div class="form-group row">  
+                           <label class="col-sm-2 col-form-label">Nombre:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="text" placeholder="Nombre" name="nombre" required="true" /> 
+                           </div>
+                           <label class="col-sm-2 col-form-label">Celular:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="text" placeholder="Celular" name="celular" required="true" />
+                           </div>   
+                             
+                         </div>
+                         <div class="form-group row">  
+                           <label class="col-sm-2 col-form-label">Direccion:</label>  
+                           <div class="col-sm-4">  
+                             <input class="form-control" type="text" placeholder="Direccion" name="direccion" required="true" /> 
+                           </div>
+                           <label class="col-sm-2 col-form-label">Pais:</label>  
+                         <div class="col-sm-4">  
+                             <select class="form-control" name="pais" id="cars">
+                                 <option value="Colombia">Colombia</option>
+                                 <option value="China">China</option>                      
+                               </select>  
+                         </div>
+                             
+                         </div>
+                         <div class="form-group row">  
+                           <label class="col-sm-2 col-form-label">Departamento:</label>  
+                         <div class="col-sm-4">  
+                             <select class="form-control" name="departamento" id="cars">
+                                 <option value="Antioquia">Antioquia</option>
+                                 <option value="Amazonas">Amazonas</option>                      
+                               </select>  
+                         </div>
+                         <label class="col-sm-2 col-form-label">Municipio:</label>  
+                         <div class="col-sm-4">  
+                             <select class="form-control" name="municipio" id="cars">
+                                 <option value="Medellin">Medellin</option>
+                                 <option value="Shenzen">Shenzen</option>                      
+                               </select>  
+                         </div>
+                             
+                         </div>
+           
+                         
+                      </div>  
+                     </form> 
+                  <!--Fin Formulario-->
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+
+
 {% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+    var editor;
+    var selectArray="";
+    var $=jQuery.noConflict();
+
+    var visible=0;
+    function openBuscar()
+    {
+        if(visible==0){
+            document.getElementsByClassName("dataTables_filter")[0].style.visibility='visible';
+            
+            visible=1;
+        }
+        else{
+            $('#example').DataTable().search( "" ).draw();
+            document.getElementsByClassName("dataTables_filter")[0].style.visibility='hidden';
+            visible=0;
+        }
+    }
+
+    function openPopup(url){
+        $('#edicion').load(url,function(){
+            $(this).modal('show');
+        });
+    }
+    function deleteRegister(){
+      var table = $("#example").DataTable();      
+      if(table.rows('.selected').data().length>0){
+        if (confirm("¿Esta seguro que desea eliminar este registro?")) {
+        alert('Se a eliminado correctamente');
+        }
+
+      }else{
+        alert( 'Primero debe seleccionar el registro que desea eliminar' );
+      }
+      
+
+    }
+    function openEdit(){
+        var table = $("#example").DataTable();
+        if(table.rows('.selected').data().length>0){
+            var Documento = table.rows('.selected').data()[0][0];
+            var TipoPersona = table.rows('.selected').data()[0][1];
+            var TipoDocumento = table.rows('.selected').data()[0][2];
+            var Nombre = table.rows('.selected').data()[0][3];
+            var CorreoElectronico = table.rows('.selected').data()[0][4];
+            var Celular = table.rows('.selected').data()[0][5];
+            var Direccion = table.rows('.selected').data()[0][6];
+            var Pais = table.rows('.selected').data()[0][7];
+            var Departamento = table.rows('.selected').data()[0][8];
+            var Municipio = table.rows('.selected').data()[0][9];
+
+
+            //var url="{% url 'EditarCliente' 2  %}"
+            $('select[name="documento"]').val(Documento);
+            $('select[name="TipoPersona"]').val(TipoPersona);
+            $('input[name="TipoDocumento"]').val(TipoDocumento);
+            $('input[name="nombre"]').val(Nombre);
+            $('input[name="email"]').val(CorreoElectronico);
+            $('input[name="celular"]').val(Celular);
+            $('input[name="direccion"]').val(Direccion);
+            $('input[name="pais"]').val(Pais);
+            $('select[name="departamento"]').val(Departamento);
+            $('select[name="municipio"]').val(Municipio);
+
+            // $('#edicion').load(url,function(){
+            $('#edicion').modal('show');
+            //});
+            
+        }else{
+            alert( 'Primero debe seleccionar el registro que desea editar' );
+        }
+       
+    }
+    $(document).ready(function(){
+        var events = $('#events');
+        var table = $("#example").DataTable({
+
+        language: {
+            "select": {
+            "cells": {
+                "1": "",
+                "_": ""
+            },
+            "columns": {
+                "1": "",
+                "_": ""
+            },
+            "rows": {
+                "1": "",
+                "_": ""
+            }
+            },
+            "processing": "Procesando...",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "emptyTable": "Ningún dato disponible en esta tabla",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "search": "Buscar:",
+            "infoThousands": ",",
+            "loadingRecords": "Cargando...",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "aria": {
+                "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros"
+            
+        },
+        "dom": '<"toolbar">frtip',
+         //"dom": '<lf<t>ip>',
+           // dom: 'Pfrtip',
+
+
+           // "dom": '<"top"i>rt<"bottom"flp><"clear">',
+       
+
+              //2 - tipo de selección 
+              select: {
+                style: 'single'
+                },
+                
+
+            //dom: "Bfrtip",
+            //ajax: "../php/staff.php",
+            searching: true,
+            responsive: true,
+            "scrollX": true,
+            scrollY:        '50vh',
+            scrollCollapse: true,
+
+                
+            
+            
+            // buttons: [
+            //  {
+                // extend: 'selected',
+               
+                //  action: function ( e, dt, node, config ) {
+                //      for (var i = 0; i < table.rows('.selected').data().length; i++) {
+                //      selectArray += table.rows('.selected').data()[i][2];
+                //      if (i+1 < table.rows('.selected').data().length) {
+                //        selectArray += ',';
+                //      }
+                //      }
+
+                //      var rows = dt.rows( { selected: true } ).count();
+    
+                //      alert( 'Data seleccionado '+selectArray+'' );
+                //  },
+                // text: 'Reload',
+                //     action: function ( e, dt, node, config ) {
+                //         dt.ajax.reload();
+                //     },
+                // text: 'Reloade',
+                //     action: function ( e, dt, node, config ) {
+                //         dt.ajax.reload();
+                //     }
+                
+                
+                
+        //     }
+        //  ]
+
+         });
+
+          //$("div.toolbar").html('<button onclick="openPopup("{% url "crearCliente" %}")" style="float: right;" class="btn btn-primary">Crear</button>  ');
+     })
+
+</script>
+{% endblock extrajs %}

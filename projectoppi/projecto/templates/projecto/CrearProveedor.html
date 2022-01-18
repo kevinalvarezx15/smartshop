@@ -1,89 +1,96 @@
-{% extends "basegrid.html" %}
- 
-{% block title %}Crear proveedor{% endblock title %}
- 
-{% block content %}
-<div class="col-md-12">
-    <h4></h4> 
-         
- <form method="POST" class="post-form" action="/addnew">  
-   {% csrf_token %}  
-  <div class="container">  
- <br>  
-  <div class="form-group row">  
-  <label class="col-sm-1 col-form-label"></label>  
-  <div class="col-sm-4">  
-  <h3>Ingrese los detalles</h3>  
-  </div>  
-   </div>  
-   
-   <div class="form-group row">  
-  <label class="col-sm-2 col-form-label">Numero documento</label>  
-  <div class="col-sm-4">  
-    <input class="form-control" type="text" placeholder="Numero documento" name="nombre" required="true" /> 
-  </div>  
-   </div>  
-  <div class="form-group row">  
-  <label class="col-sm-2 col-form-label">Tipo persona:</label>  
-  <div class="col-sm-4">  
-    <input class="form-control" type="text" placeholder="Tipo persona" name="nombre" required="true" />
-  </div> 
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Proveedor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" class="post-form" action="/addnew">  
+           <div class="container">  
+              <div class="form-group row">
+               <label class="col-sm-2 col-form-label">Documento:</label>  
+                <div class="col-sm-4">  
+                  <input class="form-control" type="number" placeholder="Documento" name="documento" required="true" />
+                </div>    
+                
+                <label class="col-sm-2 col-form-label">Correo electronico:</label>  
+                <div class="col-sm-4">  
+                  <input class="form-control" type="text" placeholder="Correo electronico" name="email" required="true" />
+                </div>  
+              </div>
+              <div class="form-group row">  
+                <label class="col-sm-2 col-form-label">Tipo documento:</label>  
+                <div class="col-sm-4">  
+                  <select class="form-control" name="cars" id="cars">
+                    <option value="volvo">Cedula</option>
+                    <option value="saab">Pasaporte</option>
+                  </select>   
+                </div>
+                <label class="col-sm-2 col-form-label">Tipo Persona:</label>  
+                <div class="col-sm-4">  
+                  <select class="form-control" name="cars" id="cars">
+                    <option value="volvo">Natural </option>
+                    <option value="saab">Juridica</option>
+                  </select>   
+                </div>
+                
+              </div>
+
+              <div class="form-group row">  
+                <label class="col-sm-2 col-form-label">Nombre:</label>  
+                <div class="col-sm-4">  
+                  <input class="form-control" type="text" placeholder="Nombre" name="nombre" required="true" /> 
+                </div>
+                <label class="col-sm-2 col-form-label">Celular:</label>  
+                <div class="col-sm-4">  
+                  <input class="form-control" type="text" placeholder="Celular" name="celular" required="true" />
+                </div>   
+                  
+              </div>
+              <div class="form-group row">  
+                <label class="col-sm-2 col-form-label">Direccion:</label>  
+                <div class="col-sm-4">  
+                  <input class="form-control" type="text" placeholder="Direccion" name="direccion" required="true" /> 
+                </div>
+                <label class="col-sm-2 col-form-label">Pais:</label>  
+              <div class="col-sm-4">  
+                  <select class="form-control" name="pais" id="cars">
+                      <option value="Colombia">Colombia</option>
+                      <option value="China">China</option>                      
+                    </select>  
+              </div>
+                  
+              </div>
+              <div class="form-group row">  
+                <label class="col-sm-2 col-form-label">Departamento:</label>  
+              <div class="col-sm-4">  
+                  <select class="form-control" name="departamento" id="cars">
+                      <option value="Antioquia">Antioquia</option>
+                      <option value="Amazonas">Amazonas</option>                      
+                    </select>  
+              </div>
+              <label class="col-sm-2 col-form-label">Municipio:</label>  
+              <div class="col-sm-4">  
+                  <select class="form-control" name="municipio" id="cars">
+                      <option value="Medellin">Medellin</option>
+                      <option value="Shenzen">Shenzen</option>                      
+                    </select>  
+              </div>
+                  
+              </div>
+
+              
+           </div>  
+          </form> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group row">  
-  <label class="col-sm-2 col-form-label">Tipo documento:</label>  
-  <div class="col-sm-4">  
-    <input class="form-control" type="text" placeholder="Tipo documento" name="nombre" required="true" />  
-  </div>  
-   </div>  
-   <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Nombre:</label>  
-    <div class="col-sm-4">  
-      <input class="form-control" type="text" placeholder="Nombre" name="nombre" required="true" />  
-    </div>  
-     </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Correo electronico:</label>  
-        <div class="col-sm-4">  
-        <input class="form-control" type="text" placeholder="Correo electronico" name="nombre" required="true" />  
-        </div>  
-        </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Celular:</label>  
-        <div class="col-sm-4">  
-            <input class="form-control" type="text" placeholder="Celular" name="nombre" required="true" />  
-        </div>  
-            </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Dirección:</label>  
-        <div class="col-sm-4">  
-        <input class="form-control" type="text" placeholder="Dirección" name="nombre" required="true" />  
-        </div>  
-        </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Pais:</label>  
-        <div class="col-sm-4">  
-            <input class="form-control" type="text" placeholder="Pais" name="nombre" required="true" />  
-        </div>  
-            </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Departamento:</label>  
-        <div class="col-sm-4">  
-            <input class="form-control" type="text" placeholder="Departamento" name="nombre" required="true" />  
-        </div>  
-            </div> 
-    <div class="form-group row">  
-        <label class="col-sm-2 col-form-label">Municipio:</label>  
-        <div class="col-sm-4">  
-            <input class="form-control" type="text" placeholder="Municipio" name="nombre" required="true" />  
-        </div>  
-            </div> 
-  <div class="form-group row">  
-  <label class="col-sm-1 col-form-label"></label>  
-  <div class="col-sm-4">  
-  <button type="submit" class="btn btn-primary">Crear</button>  
-  </div>  
-   </div>  
-  </div>  
- </form>  
-</div> 
-{% endblock content %} 
+  
+  
+  
