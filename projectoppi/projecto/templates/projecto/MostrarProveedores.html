@@ -65,7 +65,7 @@
                          <div class="form-group row">
                           <label class="col-sm-2 col-form-label">Documento:</label>  
                            <div class="col-sm-4">  
-                             <input class="form-control" type="number" placeholder="Documento" name="documento" required="true" />
+                             <input class="form-control" type="number" placeholder="Documento" disabled name="documento" required="true" />
                            </div>    
                            
                            <label class="col-sm-2 col-form-label">Correo electronico:</label>  
@@ -206,7 +206,7 @@
 
 
             //var url="{% url 'EditarCliente' 2  %}"
-            $('select[name="documento"]').val(Documento);
+            $('input[name="documento"]').val(Documento);
             $('select[name="TipoPersona"]').val(TipoPersona);
             $('input[name="TipoDocumento"]').val(TipoDocumento);
             $('input[name="nombre"]').val(Nombre);
