@@ -48,10 +48,10 @@
                   <form method="POST" class="post-form" action="/addnew">  
                     <div class="container">  
                        <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Codigo:</label>  
+                        <!-- <label class="col-sm-2 col-form-label">Codigo:</label>  
                          <div class="col-sm-4">  
                            <input class="form-control" type="number" placeholder="Documento" name="documento" required="true" />
-                         </div>    
+                         </div>     -->
                          <label class="col-sm-2 col-form-label">Tipo Producto:</label>  
                          <div class="col-sm-4">  
                            <select class="form-control" name="cars" id="cars">
@@ -59,11 +59,13 @@
                              <option value="saab"> Memorias de almacenamiento </option>
                            </select>   
                        </div>
+                       <label class="col-sm-2 col-form-label">Nombre:</label>  
+                      <div class="col-sm-4">  
+                        <input class="form-control" type="text" placeholder="nombre" name="nombre" required="true" />
+                      </div>  
+                      </div>
                        <div class="form-group row">
-                         <label class="col-sm-2 col-form-label">Nombre:</label>  
-                          <div class="col-sm-4">  
-                            <input class="form-control" type="text" placeholder="nombre" name="nombre" required="true" />
-                          </div>    
+                          
                           
                           <label class="col-sm-2 col-form-label">Descripcion:</label>  
                           <div class="col-sm-4">  
@@ -71,7 +73,7 @@
                           </div>  
                         </div> 
                        
-                       </div>
+                       
                     </div>  
                    </form> 
                 <!--Fin Formulario-->
