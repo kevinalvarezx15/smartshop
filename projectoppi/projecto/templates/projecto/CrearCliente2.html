@@ -1,0 +1,106 @@
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" class="post-form" action="/addnew">  
+         <div class="container">  
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">Tipo persona:</label>  
+              <div class="col-sm-4">  
+                <select class="form-control" name="cars" id="cars">
+                  <option value="-1">Seleccione tipo persona</option>
+                  <option value="Natural">Natural</option>
+                  <option value="Juridica">Juridica</option>
+                </select>   
+              </div>
+              <label class="col-sm-2 col-form-label">Correo electronico:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Correo electronico" name="email" required="true" />
+              </div>  
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">Tipo documento:</label>  
+              <div class="col-sm-4">  
+                <select class="form-control" name="cars" id="cars">
+                  <option value="-1">Seleccione tipo documento</option>
+                  <option value="volCedulavo">Cedula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>   
+              </div>
+              <label class="col-sm-2 col-form-label">Departamento:</label>  
+              <div class="col-sm-4">  
+                  <select class="form-control" name="departamento" id="cars">
+                      <option value="-1">Seleccione departamento</option>
+                      <option value="Antioquia">Antioquia</option>
+                      <option value="Amazonas">Amazonas</option>                      
+                    </select>  
+              </div>
+              
+            </div>
+            <div class="form-group row">   
+              <label class="col-sm-2 col-form-label">Numero documento:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Numero documento" name="nombreContacto" required="true" />
+              </div>
+              <label class="col-sm-2 col-form-label">Municipio:</label>  
+              <div class="col-sm-4">  
+                  <select class="form-control" name="municipio" id="cars">
+                      <option value="-1">Seleccione municipio</option>
+                      <option value="Medellin">Medellin</option>
+                      <option value="Bello">Bello</option>
+                    </select>  
+              </div> 
+              
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">Nombre:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Nombre" name="nombre" required="true" /> 
+              </div>
+              <label class="col-sm-2 col-form-label">Direccion:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Direccion" name="direccion" required="true" /> 
+              </div>
+                
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">Apellido:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Apellido" name="apellido" required="true" />
+              </div>
+              <label class="col-sm-2 col-form-label">Nombre contacto:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Nombre contacto" name="nombreContacto" required="true" />
+              </div>  
+
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Celular:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Celular" name="celular" required="true" />
+              </div>    
+            
+              <label class="col-sm-2 col-form-label">Telefono contacto:</label>  
+              <div class="col-sm-4">  
+                <input class="form-control" type="text" placeholder="Telefono contacto" name="telefonoContacto" required="true" />
+              </div>
+            </div> 
+         </div>  
+        </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
