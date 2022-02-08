@@ -1,11 +1,15 @@
+from argparse import Namespace
 from django.urls import path
 from . import views
 
+app_name = 'cliente'
 urlpatterns =[
-    path('',views.cargar_cliente, name='cliente'),
-    path('Crear',views.addnew, name='crearCliente'),
-    path('Editar/<int:id>',views.editCliente, name='EditarCliente'),
-    # path('registro/',views.cargar_registro, name='registro'),
+    path('',views.ClienteListView.as_view(), name='cliente'),
+    path('Crear/',views.ClientesCreateView.as_view(), name='crearCliente'),
+    path('Editar/<int:pk>',views.ClienteUpdateView.as_view(), name='EditarCliente'),
+    path('cb/',views.selectCliente, name='selectCliente'),
+    path('Eliminar/<int:pk>',views.ClienteDeleteView.as_view(), name='EliminarCliente'),
+    #path('registro/<int:pk>/',views.ClienteUpdateView.as_view(), name='registro'),
     
 ]
 
