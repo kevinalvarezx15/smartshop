@@ -1,3 +1,4 @@
+
 {% extends "basegrid.html" %}
  
 {% block title %}Proveedores{% endblock title %}
@@ -152,6 +153,7 @@
 
 {% endblock content %}
 {% block extrajs %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     var editor;
     var selectArray="";
@@ -180,12 +182,24 @@
     function deleteRegister(){
       var table = $("#example").DataTable();      
       if(table.rows('.selected').data().length>0){
-        if (confirm("¿Esta seguro que desea eliminar este registro?")) {
-        alert('Se a eliminado correctamente');
-        }
+
+        if (swal({
+          title: "Eliminar",
+          text: "Estas seguro que deseas eliminar este registro ?",
+          icon: "warning",
+          buttons: ["No","Si"]
+        }).then(respuesta=>{
+          if(respuesta){
+            swal({text: "El registro se ha borrado con exito",
+            icon:"success"})
+          }
+        })
+        ) {
+      
+      }
 
       }else{
-        alert( 'Primero debe seleccionar el registro que desea eliminar' );
+        swal('Primero debe seleccionar el registro que desea eliminar',);
       }
       
 
@@ -222,7 +236,7 @@
             //});
             
         }else{
-            alert( 'Primero debe seleccionar el registro que desea editar' );
+            swal( 'Primero debe seleccionar el registro que desea editar' );
         }
        
     }
