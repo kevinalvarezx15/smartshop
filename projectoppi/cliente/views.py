@@ -56,47 +56,6 @@ class ClientesCreateView(CreateView):
                 data['error']=str(e)
             return JsonResponse(data)
 
-        # def post(self,request,*args,**kwargs):
-            
-        #     if is_ajax(request=request):
-        #         form=self.form_class(request.POST)
-        #         print("tipo")
-        #         print(request.POST['tipoDocumentoId'])
-        #         if form.is_valid():
-                    
-        #             nuevoCliente=Clientes(
-        #                 documento=form.cleaned_data.get('documento'),
-        #                 nombres=form.cleaned_data.get('nombres'),
-        #                 apellidos=form.cleaned_data.get('apellidos'),
-        #                 tipoPersonaId=form.cleaned_data.get('tipoPersonaId'),
-        #                 tipoDocumentoId=form.cleaned_data.get('tipoDocumentoId'),                    
-        #                 celular=form.cleaned_data.get('celular'),
-        #                 correo=form.cleaned_data.get('correo'),
-        #                 departamentoId=form.cleaned_data.get('departamentoId'),
-        #                 municipioId=form.cleaned_data.get('municipioId'),
-        #                 direccion=form.cleaned_data.get('direccion'),
-        #                 nombreContacto=form.cleaned_data.get('nombreContacto'),
-        #                 celularContacto=form.cleaned_data.get('celularContacto'),
-        #                 dateCreate=form.cleaned_data.get('dateCreate'),
-        #                 dateUpdate=form.cleaned_data.get('dateUpdate'),
-        #             )
-        #             print(nuevoCliente.tipoDocumentoId)
-        #             #nuevoCliente.save()
-        #             mensaje="Registro correctamente"
-        #             error='No hay error'
-        #             response=JsonResponse({'mensaje':mensaje,'error':error})
-        #             response.status_code=201
-        #             return response
-        #         else:
-        #             mensaje="No se ha podido registrar"
-        #             error=form.errors
-        #             response=JsonResponse({'mensaje':mensaje,'error':error})
-        #             response.status_code=400
-        #             return response
-        #     else:
-        #         return redirect('cliente:cliente')
-
-        
 
         def get_context_data(self, **kwargs):
             context=super().get_context_data(**kwargs)
@@ -135,15 +94,19 @@ class ClienteUpdateView(UpdateView):
     template_name='cliente/CrearCliente.html'
     success_url=reverse_lazy('cliente:cliente')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object=self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self,request,*args,**kwargs):
         data={}
         try:
             print("Update")
-            form=ClienteForm(request.POST)
-            # if form.is_valid():
-            form.save()
-            # else:
-            #     data['error']=form.errors
+            form=self.get_form()
+            if form.is_valid():
+                form.save()
+            else:
+                data['error']=form.errors
             
         except Exception as e:
             data['error']=str(e)

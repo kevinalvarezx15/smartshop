@@ -98,10 +98,6 @@ class ClienteForm(ModelForm):
         
     }
 
-class SelectForm(ModelForm):
-    class Meta:
-        model=TipoPersona
-        fields='__all__'
     #Combobox
     tipoPersonaId  = ModelChoiceField(queryset=TipoPersona.objects.all(),label="Tipo persona",widget=Select(
         attrs={'class':'form-control select2',
