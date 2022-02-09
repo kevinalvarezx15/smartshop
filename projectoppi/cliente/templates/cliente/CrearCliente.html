@@ -1,0 +1,206 @@
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form_creacion"  method="POST" action={{url}}> 
+          {% csrf_token %}
+          {{form.errors}}
+         <div class="container">  
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">{{form.tipoPersonaId.label}} </label>  
+              <div class="col-sm-4"> 
+                {{form.tipoPersonaId}}  
+              </div>            
+              <label class="col-sm-2 col-form-label">{{form.correo.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.correo}}
+              </div>  
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">{{form.tipoDocumentoId.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.tipoDocumentoId}}  
+              </div>
+              <label class="col-sm-2 col-form-label">{{form.departamentoId.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.departamentoId}}
+              </div>
+              
+            </div>
+            <div class="form-group row">   
+              <label class="col-sm-2 col-form-label">{{form.documento.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.documento}}
+              </div>
+              <label class="col-sm-2 col-form-label">{{form.municipioId.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.municipioId}}
+              </div> 
+              
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">{{form.nombres.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.nombres}} 
+              </div>
+              <label class="col-sm-2 col-form-label">{{form.direccion.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.direccion}} 
+              </div>
+                
+            </div>
+            <div class="form-group row">  
+              <label class="col-sm-2 col-form-label">{{form.apellidos.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.apellidos}}
+              </div>
+              <label class="col-sm-2 col-form-label">{{form.nombreContacto.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.nombreContacto}}
+              </div>  
+
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">{{form.celular.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.celular}}
+              </div>    
+            
+              <label class="col-sm-2 col-form-label">{{form.celularContacto.label}}</label>  
+              <div class="col-sm-4">  
+                {{form.celularContacto}}
+              </div>
+            </div> 
+         </div>
+         <div class="modal-footer">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>  
+        </form> 
+      </div>
+  </div>
+</div>
+<script>
+var select_tipoDocumento=$('select[name="tipoDocumentoId"]');
+var select_tipoMunicipio=$('select[name="municipioId"]');
+var options = '<option value="">---------</option>'; 
+function onChageDepartamento(){
+  var id=$('select[name="departamentoId"]').val();
+  var idMun=$(select_tipoMunicipio).val();
+  var options = '<option value="">---------</option>';
+  if (id == '') {
+    select_tipoMunicipio.html(options);
+    return false;
+  }
+
+  $.ajax({
+      url: "{% url 'cliente:selectCliente' %}",
+      type: 'POST',
+      data: {
+          'action': 'search_tipoMunicipio_id',
+          'id': id,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      //dataType: 'json',
+  }).done(function (data) {
+      if (!data.hasOwnProperty('error')) {
+          select_tipoMunicipio.html('').select2({
+              theme: "bootstrap4",
+              language: 'es',
+              dropdownParent: $('#edicion'),
+              data: data
+          });
+          $(select_tipoMunicipio).val(idMun).change();
+          return false;
+      }
+      message_error(data.error);
+  }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert(textStatus + ': ' + errorThrown);
+  }).always(function (data) {
+  });
+}
+function onChageTipopersona(){
+  debugger
+  var IdDoc=$('select[name="tipoDocumentoId"]').val();
+  var id=$('select[name="tipoPersonaId"]').val();
+  var options = '<option value="">---------</option>';
+  if (id == '') {
+    select_tipoDocumento.html(options);
+    return false;
+  }
+
+  $.ajax({
+      url: "{% url 'cliente:selectCliente' %}",
+      type: 'POST',
+      data: {
+          'action': 'search_tipoDocumento_id',
+          'id': id,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      //dataType: 'json',
+  }).done(function (data) {
+      if (!data.hasOwnProperty('error')) {
+          select_tipoDocumento.html('').select2({
+              theme: "bootstrap4",
+              language: 'es',
+              dropdownParent: $('#edicion'),
+              data: data
+          });
+          $('select[name="tipoDocumentoId"]').val(IdDoc).change();
+          return false;
+      }
+      message_error(data.error);
+  }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert(textStatus + ': ' + errorThrown);
+  }).always(function (data) {
+  });
+  
+};
+
+$(function (){
+  $('.select2').select2({
+    language: 'es',
+    theme: 'bootstrap4',
+    dropdownParent: $('#edicion'),
+    
+  })
+  var options = '<option value="">---------</option>'; 
+  onChageTipopersona();
+  onChageDepartamento();
+
+  $('form').on('submit', function(e){
+    e.preventDefault();
+    var parameters=$(this).serializeArray();
+    debugger
+    $.ajax({
+      
+      url:'{{url}}',
+      type:'POST',
+      data:parameters,
+      dataType:'json'      
+    }).done(function(data){
+      if(!data.hasOwnProperty('error')){
+        window.location='/cliente/';
+        //location.href('/cliente/');
+        // location.
+        return false;
+      }
+      message_error(data.error);
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert(textStatus + ': ' + errorThrown);
+    }).always(function (data) {
+    });
+
+  })
+
+});  
+</script>
+
+
+
+
+
