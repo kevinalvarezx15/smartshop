@@ -60,12 +60,54 @@
         var pk = table.rows('.selected').data()[0][0];
         var dataurl="{% url 'cliente:EliminarCliente' 0  %}"
         var url=dataurl.replace('0',pk)
-        $('#edicion').load(url,function(){
-        $('#edicion').modal('show');
-        });
+        Swal.fire({
+        title: 'Estas seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText:'Cancelar',
+        confirmButtonText: 'Si, deseo eliminarlo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({      
+                    url:url,
+                    type:'POST',
+                    data:{
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                    },
+                    dataType:'json'      
+                    }).done(function(data){
+                    if(!data.hasOwnProperty('error')){
+                        Swal.fire({
+                            title:'Borrado!',
+                            text:'El registro ha sido eliminado correctamente',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                        })
+                        window.location='/cliente/';
+                        return false;
+                    }
+                    message_error(data.error);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                    }).always(function (data) {
+                });
+            }
+        })
+
+        // var url=dataurl.replace('0',pk)
+        // $('#edicion').load(url,function(){
+        // $('#edicion').modal('show');
+        // });
 
       }else{
-        alert( 'Primero debe seleccionar el registro que desea eliminar' );
+        Swal.fire({
+            text:'Primero debe seleccionar el registro que desea eliminar',
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+        })        
       }
       
 
@@ -74,31 +116,6 @@
         var table = $("#example").DataTable();
         if(table.rows('.selected').data().length>0){
             var pk = table.rows('.selected').data()[0][0];
-            // var Nombre = table.rows('.selected').data()[0][1];
-            // var Apellido = table.rows('.selected').data()[0][2];
-            // var TipoPersona = table.rows('.selected').data()[0][3];
-            // var TipoDocumento = table.rows('.selected').data()[0][4];
-            // var Celular = table.rows('.selected').data()[0][5];
-            // var Correo = table.rows('.selected').data()[0][6];
-            // var Departamento = table.rows('.selected').data()[0][7];
-            // var Municipio = table.rows('.selected').data()[0][8];
-            // var Direccion = table.rows('.selected').data()[0][9];
-            // var NombreContacto = table.rows('.selected').data()[0][10];
-            // var TelefonoContacto = table.rows('.selected').data()[0][11];
-
-            
-            // $('select[name="TipoPersona"]').val(TipoPersona);
-            // $('select[name="TipoDocumento"]').val(TipoDocumento);
-            // $('input[name="nombre"]').val(Nombre);
-            // $('input[name="apellido"]').val(Apellido);
-            // $('input[name="documento"]').val(Cedula);
-            // $('input[name="celular"]').val(Celular);
-            // $('input[name="email"]').val(Correo);
-            // $('input[name="direccion"]').val(Direccion);
-            // $('input[name="nombreContacto"]').val(NombreContacto);
-            // $('input[name="telefonoContacto"]').val(TelefonoContacto);
-            // $('select[name="departamento"]').val(Departamento);
-            // $('select[name="municipio"]').val(Municipio);
 
             var dataurl="{% url 'cliente:EditarCliente' 0  %}"
             var url=dataurl.replace('0',pk)
@@ -107,7 +124,11 @@
             });
             
         }else{
-            alert( 'Primero debe seleccionar el registro que desea editar' );
+            Swal.fire({
+            text:'Primero debe seleccionar el registro que desea editar',
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            })    
         }
        
     }

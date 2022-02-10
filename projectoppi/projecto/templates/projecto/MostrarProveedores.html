@@ -183,23 +183,46 @@
       var table = $("#example").DataTable();      
       if(table.rows('.selected').data().length>0){
 
-        if (swal({
-          title: "Eliminar",
-          text: "Estas seguro que deseas eliminar este registro ?",
-          icon: "warning",
-          buttons: ["No","Si"]
-        }).then(respuesta=>{
-          if(respuesta){
-            swal({text: "El registro se ha borrado con exito",
-            icon:"success"})
-          }
-        })
-        ) {
+      //   if (swal({
+      //     title: "Eliminar",
+      //     text: "Estas seguro que deseas eliminar este registro ?",
+      //     icon: "warning",
+      //     buttons: ["No","Si"]
+      //   }).then(respuesta=>{
+      //     if(respuesta){
+      //       swal({text: "El registro se ha borrado con exito",
+      //       icon:"success"})
+      //     }
+      //   })
+      //   ) {
       
-      }
+      // }
+      Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText:'Cancelar',
+      confirmButtonText: 'Si, deseo eliminarlo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title:'Borrado!',
+            text:'El registro ha sido eliminado correctamente',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            
+          })
+        }
+      })
 
       }else{
-        swal('Primero debe seleccionar el registro que desea eliminar',);
+        Swal.fire(
+          'Primero debe seleccionar el registro que desea eliminar'
+          )
+        // swal('Primero debe seleccionar el registro que desea eliminar',);
       }
       
 

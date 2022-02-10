@@ -121,8 +121,21 @@ class ClienteUpdateView(UpdateView):
 
 class ClienteDeleteView(DeleteView):
     model=Clientes
-    template_name='cliente/EliminarCliente.html'
+    #template_name='cliente/EliminarCliente.html'
     success_url=reverse_lazy('cliente:cliente')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object=self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self,request,*args,**kwargs):
+        data={}
+        try:
+            self.object.delete()
+
+        except Exception as e:
+            data['error']=str(e)
+        return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
