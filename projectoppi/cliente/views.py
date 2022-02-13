@@ -74,7 +74,7 @@ def selectCliente(request):
         if action=='search_tipoDocumento_id':
             print(request.POST['id'])
             data=[{'id':'', 'text':'---------'}]
-            for i in TipoDocumento.objects.filter(TipoPersonaId=request.POST['id']):
+            for i in TipoDocumento.objects.filter(TipoPersonaId=1):
                 data.append({'id':i.id,'text':i.nombre})
         elif action=='search_tipoMunicipio_id':
             print(request.POST['id'])

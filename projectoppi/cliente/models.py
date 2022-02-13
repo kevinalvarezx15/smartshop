@@ -37,13 +37,13 @@ class Municipios(models.Model):
         db_table="tblMunicipios"
 
 class Clientes(models.Model):
-    documento=models.IntegerField(verbose_name='Numero documento',primary_key=True)
+    documento=models.IntegerField(verbose_name='Número documento',primary_key=True)
     nombres=models.CharField(max_length=50,verbose_name='Nombres')
     apellidos=models.CharField(max_length=50,verbose_name='Apellidos',null=True,blank=True)
     tipoPersonaId=models.ForeignKey(TipoPersona,on_delete=models.PROTECT,verbose_name='Tipo persona',null=True,blank=True)
     tipoDocumentoId=models.ForeignKey(TipoDocumento,on_delete=models.PROTECT,verbose_name='Tipo documento',null=True,blank=True)
     celular=models.CharField(max_length=15,verbose_name='Celular')
-    correo=models.CharField(max_length=50,verbose_name='Correo electronico',null=True,blank=True)
+    correo=models.CharField(max_length=50,verbose_name='Correo electrónico',null=True,blank=True)
     departamentoId=models.ForeignKey(Departamentos,on_delete=models.PROTECT,null=True,blank=True)
     municipioId=models.ForeignKey(Municipios,on_delete=models.PROTECT,null=True,blank=True)
     direccion=models.CharField(max_length=50,verbose_name='Dirección')

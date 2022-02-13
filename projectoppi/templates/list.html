@@ -54,11 +54,11 @@
             $(this).modal('show');
         });
     }
-    function deleteRegister(){
+    function deleteRegister(dataurl,wlocation){
       var table = $("#example").DataTable();      
       if(table.rows('.selected').data().length>0){
         var pk = table.rows('.selected').data()[0][0];
-        var dataurl="{% url 'cliente:EliminarCliente' 0  %}"
+        var dataurl=dataurl
         var url=dataurl.replace('0',pk)
         Swal.fire({
         title: 'Estas seguro?',
@@ -86,7 +86,7 @@
                             icon: 'success',
                             confirmButtonColor: '#3085d6',
                         })
-                        window.location='/cliente/';
+                        window.location=wlocation;
                         return false;
                     }
                     message_error(data.error);
@@ -112,12 +112,12 @@
       
 
     }
-    function openEdit(){
+    function openEdit(dataurl){
         var table = $("#example").DataTable();
         if(table.rows('.selected').data().length>0){
             var pk = table.rows('.selected').data()[0][0];
 
-            var dataurl="{% url 'cliente:EditarCliente' 0  %}"
+            var dataurl=dataurl
             var url=dataurl.replace('0',pk)
             $('#edicion').load(url,function(){
             $('#edicion').modal('show');

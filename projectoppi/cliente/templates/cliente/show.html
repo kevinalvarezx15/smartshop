@@ -3,26 +3,26 @@
 {% block botones %}
   <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
     <button onclick="openPopup('{% url 'cliente:crearCliente' %}')" class="btn btn-primary">Crear</button>  
-    <button onclick="openEdit()" class="btn btn-primary">Modificar</button>
-    <button onclick="deleteRegister()" class="btn btn-primary">Eliminar</button>
+    <button onclick="openEdit('{% url 'cliente:EditarCliente' 0  %}')" class="btn btn-primary">Modificar</button>
+    <button onclick="deleteRegister('{% url 'cliente:EliminarCliente' 0  %}','/cliente/')" class="btn btn-primary">Eliminar</button>
     <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
   </div>
 {% endblock %}
 
 {% block columns %}
   <tr>
-    <th>Cedula</th>
-    <th>Nombre</th>
-    <th>Apellido</th>
+    <th>Número documento</th>
+    <th>Nombres</th>
+    <th>Apellidos</th>
     <th>Tipo persona</th>
     <th>Tipo documento</th>
     <th>Celular</th>
-    <th>Correo electronico</th>
+    <th>Correo electrónico</th>
     <th>Departamento</th>
     <th>Municipio</th>
-    <th>Direccion</th>
+    <th>Dirección</th>
     <th>Nombre contacto</th>
-    <th>Telefono contacto</th>  
+    <th>Celular contacto</th>  
   </tr>
 {% endblock %}
                 

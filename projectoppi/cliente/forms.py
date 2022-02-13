@@ -31,7 +31,7 @@ class ClienteForm(ModelForm):
         ),
         'documento':NumberInput(
             attrs={
-                'placeholder': 'Ingrese el numero de documento',
+                'placeholder': 'Ingrese el número de documento',
                 'class':'form-control',
 
             }
