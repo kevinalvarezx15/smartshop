@@ -1,1 +1,1 @@
-web : gunicorn django projectoppi.wsgi
+web: gunicorn projectoppi.wsgi
