@@ -1,1 +1,1 @@
-web: gunicorn projectoppi.wsgi
+web: gunicorn projectoppi.wsgi --log-file -
