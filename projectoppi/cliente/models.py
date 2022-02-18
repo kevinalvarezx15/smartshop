@@ -18,9 +18,17 @@ class TipoDocumento(models.Model):
     
     class Meta:
         db_table="tblTipoDocumento"
-
+class Paises(models.Model):
+    nombre=models.CharField(max_length=50,verbose_name='Nombre')
+    def __str__(self) -> str:
+        return self.nombre
+    
+    class Meta:
+        db_table="tblPaises"
+      
 class Departamentos(models.Model):
     nombre=models.CharField(max_length=50,verbose_name='Nombre')
+    pais=models.ForeignKey(Paises,verbose_name='Paises',on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
         return self.nombre
     
