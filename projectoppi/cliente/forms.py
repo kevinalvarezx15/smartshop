@@ -1,6 +1,5 @@
 from dataclasses import fields
 from select import select
-from turtle import onclick
 from django.forms import *
 
 from cliente.models import Clientes, Departamentos, Municipios, TipoDocumento, TipoPersona

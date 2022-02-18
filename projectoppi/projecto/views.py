@@ -11,7 +11,7 @@ def cargar_login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request,user)
-            return redirect('cliente')
+            return redirect('cliente:cliente')
         else:
             return render(request, 'projecto/login.html',{'error': 'Nombre de usuario o contraseña incorrecta'})
     return render(

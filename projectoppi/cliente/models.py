@@ -2,6 +2,13 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
+class Paises(models.Model):
+    nombre=models.CharField(max_length=50,verbose_name='Nombre')
+    def __str__(self) -> str:
+        return self.nombre
+    
+    class Meta:
+        db_table="tblPaises"
 class TipoPersona(models.Model):
     nombre=models.CharField(max_length=50,verbose_name='Nombre')
     def __str__(self) -> str:
@@ -13,18 +20,12 @@ class TipoPersona(models.Model):
 class TipoDocumento(models.Model):
     nombre=models.CharField(max_length=50,verbose_name='Nombre')
     TipoPersonaId=models.ForeignKey(TipoPersona,verbose_name='Tipo persona',on_delete=models.PROTECT,null=True,blank=True)
+    pais=models.ForeignKey(Paises,verbose_name='Paises',on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
         return self.nombre
     
     class Meta:
         db_table="tblTipoDocumento"
-class Paises(models.Model):
-    nombre=models.CharField(max_length=50,verbose_name='Nombre')
-    def __str__(self) -> str:
-        return self.nombre
-    
-    class Meta:
-        db_table="tblPaises"
       
 class Departamentos(models.Model):
     nombre=models.CharField(max_length=50,verbose_name='Nombre')
