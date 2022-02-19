@@ -8,6 +8,7 @@ from django.views.generic import CreateView, ListView, UpdateView,DeleteView
 from cliente.forms import ClienteForm
 from cliente.models import Clientes, TipoDocumento,Municipios
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -29,6 +30,11 @@ def cargar_cliente(request):
 class ClienteListView(ListView):
     model=Clientes
     template_name='cliente/show.html'
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

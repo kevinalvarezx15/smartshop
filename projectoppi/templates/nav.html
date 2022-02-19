@@ -40,6 +40,17 @@
           </li>
         
       </ul>
+              
+      <a class="nav-link" href="#" style="color: white;">
+        <i class="bi bi-person-circle" style='color: white'></i>  {{request.user.username}}
+      </a>
+      
+      <span class="navbar-text">
+        
+        <a class="btn btn-primary" href="{% url 'logout' %}" role="button">
+          <span class='bi bi-box-arrow-in-right' style='color: white'></span>
+        </a>
+      </span>
     </div>
   </div>
 </nav>

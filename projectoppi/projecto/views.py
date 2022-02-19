@@ -1,9 +1,15 @@
-from django.contrib.auth import authenticate, login
+from ast import pattern
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LogoutView
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
+from django.views.generic import RedirectView
 
 def cargar_login(request):
+    if request.user.is_authenticated:
+        return redirect('cliente:cliente')
+
     if request.method=='POST':
         print ('*')
         username = request.POST['username']
@@ -38,3 +44,10 @@ def cargar_registro(request):
         request,
         'projecto/registro.html'
     )
+
+class LogoutRedirectView(RedirectView):
+    pattern_name='login'
+
+    def dispatch(self, request, *args, **kwargs):
+        logout(request)
+        return super().dispatch(request, *args, **kwargs)
