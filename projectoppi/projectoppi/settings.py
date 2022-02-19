@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'projecto.apps.ProjectoConfig',
     'cliente.apps.ClienteConfig',
     'proveedores.apps.ProveedoresConfig',
+    'productos.apps.ProductosConfig',
 ]
 
 MIDDLEWARE = [
