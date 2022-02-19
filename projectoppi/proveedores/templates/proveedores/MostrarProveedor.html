@@ -1,0 +1,42 @@
+{% extends 'list.html' %}
+ 
+{% block botones %}
+  <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+    <button onclick="openPopup('{% url 'proveedores:crearProveedor' %}')" class="btn btn-primary">Crear</button>  
+    <button onclick="openEdit('{% url 'proveedores:EditarProveedor' 0  %}')" class="btn btn-primary">Modificar</button>
+    <button onclick="deleteRegister('{% url 'proveedores:EliminarProveedor' 0  %}','/proveedores/')" class="btn btn-primary">Eliminar</button>
+    <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
+  </div>
+{% endblock %}
+
+{% block columns %}
+  <tr>
+    <th>Número documento</th>
+    <th>Nombres</th>
+    <th>Tipo documento</th>
+    <th>Celular</th>
+    <th>Correo electrónico</th>
+    <th>País</th>
+    <th>Región</th>
+    <th>Ciudad</th>
+    <th>Dirección</th>
+  </tr>
+{% endblock %}
+                
+{% block rows %}
+  {% for obj in object_list %}
+    <tr>
+      <td>{{ obj.documento }}</td>
+      <td>{{ obj.nombres }}</td>
+      <td>{{ obj.tipoDocumentoId }}</td>
+      <td>{{ obj.celular }}</td>
+      <td>{{ obj.correo }}</td>
+      <td>{{ obj.pais }}</td>
+      <td>{{ obj.departamentoId }}</td>
+      <td>{{ obj.municipioId }}</td>
+      <td>{{ obj.direccion }}</td>
+
+    </tr>
+  {% endfor %}
+
+{% endblock %}

@@ -1,6 +1,5 @@
 from dataclasses import fields
 from select import select
-from turtle import onclick
 from django.forms import *
 
 from cliente.models import Clientes, Departamentos, Municipios, TipoDocumento, TipoPersona
@@ -33,6 +32,8 @@ class ClienteForm(ModelForm):
             attrs={
                 'placeholder': 'Ingrese el número de documento',
                 'class':'form-control',
+                'maxlength':'20',
+                'oninput':'javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);'
 
             }
         ),
@@ -61,6 +62,7 @@ class ClienteForm(ModelForm):
             attrs={
                 'placeholder': 'Ingrese un numero celular',
                 'class':'form-control',
+                'oninput':'javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);'
 
             }
         ), 
@@ -68,6 +70,7 @@ class ClienteForm(ModelForm):
             attrs={
                 'placeholder': 'Ingrese un numero celular',
                 'class':'form-control',
+                'oninput':'javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);'
 
             }
         ),      
