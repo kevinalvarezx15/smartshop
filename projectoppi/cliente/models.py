@@ -46,7 +46,7 @@ class Municipios(models.Model):
         db_table="tblMunicipios"
 
 class Clientes(models.Model):
-    documento=models.IntegerField(verbose_name='Número documento',primary_key=True)
+    documento=models.BigIntegerField(verbose_name='Número documento',primary_key=True)
     nombres=models.CharField(max_length=50,verbose_name='Nombres')
     apellidos=models.CharField(max_length=50,verbose_name='Apellidos',null=True,blank=True)
     tipoPersonaId=models.ForeignKey(TipoPersona,on_delete=models.PROTECT,verbose_name='Tipo persona',null=True,blank=True)

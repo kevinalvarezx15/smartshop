@@ -3,7 +3,7 @@ from cliente.models import Paises, TipoDocumento, Departamentos, Municipios
 
 # Create your models here.
 class Proveedores(models.Model):
-    documento=models.IntegerField(verbose_name='Número documento',primary_key=True)
+    documento=models.BigIntegerField(verbose_name='Número documento',primary_key=True)
     nombres=models.CharField(max_length=50,verbose_name='Nombres')
     tipoDocumentoId=models.ForeignKey(TipoDocumento,on_delete=models.PROTECT,verbose_name='Tipo documento',null=True,blank=True)
     celular=models.CharField(max_length=15,verbose_name='Celular')
