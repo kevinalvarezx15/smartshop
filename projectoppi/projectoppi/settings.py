@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'cliente.apps.ClienteConfig',
     'proveedores.apps.ProveedoresConfig',
     'productos.apps.ProductosConfig',
+    'tipoProducto.apps.TipoproductoConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -145,5 +147,7 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/proveedores/'
+
+AUTH_USER_MODEL="user.User"
 
 django_heroku.settings(locals())

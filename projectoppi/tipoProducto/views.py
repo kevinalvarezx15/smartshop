@@ -1,34 +1,33 @@
-from re import template
 from django.shortcuts import render
 from django.http import JsonResponse,HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView,DeleteView
-from proveedores.models import Proveedores
-from proveedores.forms import ProveedoresForm
-from cliente.models import Departamentos,Paises,TipoDocumento,Municipios
+from productos.forms import ProductoForm, TipoProductoForm
+from productos.models import Productos, TipoProducto
 
 # Create your views here.
-class ProvedoresListView(ListView):
-    model=Proveedores
-    template_name='proveedores/MostrarProveedor.html'
-
+class TipoProductoListView(ListView):
+    model=TipoProducto
+    template_name='tipoproducto/mostrartipoproducto.html'
+    
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('login')
         return super().dispatch(request, *args, **kwargs)
-
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de proveedores'
-        context['titlepag'] = 'Proveedores'
+        context['title'] = 'Listado de Tipo Productos'
+        context['titlepag'] = 'Tipo Productos'
         return context
-class ProveedorCreateView(CreateView):
+
+class TipoProductoCreateView(CreateView):
     try:
-        model=Proveedores
-        form_class=ProveedoresForm
-        template_name='proveedores/CrearProveedor.html'
-        success_url=reverse_lazy('proveedores:proveedores')
+        model=TipoProducto
+        form_class=TipoProductoForm
+        template_name='tipoproducto/creartipoproducto.html'
+        success_url=reverse_lazy('productos:tipoproducto')
 
         def post(self,request,*args,**kwargs):
             data={}
@@ -47,17 +46,17 @@ class ProveedorCreateView(CreateView):
 
         def get_context_data(self, **kwargs):
             context=super().get_context_data(**kwargs)
-            context['url'] = reverse_lazy('proveedores:crearProveedor')
+            context['url'] = reverse_lazy('tipoproductos:crearTipoproducto')
             print("hello")
             return context
     except Exception as ex:
         print(ex)
-
-class ProveedoresUpdateView(UpdateView):
-    model=Proveedores
-    form_class=ProveedoresForm
-    template_name='proveedores/CrearProveedor.html'
-    success_url=reverse_lazy('proveedores:proveedores')
+     
+class TipoProductoUpdateView(UpdateView):
+    model=TipoProducto
+    form_class=TipoProductoForm
+    template_name='tipoproducto/creartipoproducto.html'
+    success_url=reverse_lazy('tipoproductos:tipoproducto')
 
     def dispatch(self, request, *args, **kwargs):
         self.object=self.get_object()
@@ -80,38 +79,14 @@ class ProveedoresUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         idcon=self.kwargs.get('pk')
-        context['url'] = reverse_lazy('proveedores:EditarProveedor',kwargs={'pk': idcon})
+        context['url'] = reverse_lazy('tipoproductos:EditarTipoproducto',kwargs={'pk': idcon})
         context['idcom'] =  "object.pk"
-        context['mode']="edit"
         return context
 
-    
-def selectProveedores(request):
-
-    data={}
-    try:
-        action=request.POST['action']
-        if action=='search_tipoDepartamento_id':
-            print(request.POST['id'])
-            data=[{'id':'', 'text':'---------'}]
-            for i in Departamentos.objects.filter(pais=request.POST['id']):
-                data.append({'id':i.id,'text':i.nombre})
-        elif action=='search_tipoMunicipio_id':
-            print(request.POST['id'])
-            data=[{'id':'', 'text':'---------'}]
-            for i in Municipios.objects.filter(DepartamentoId=request.POST['id']):
-                data.append({'id':i.id,'text':i.nombre})
-        else:
-            data['error']='Ha ocurrido un error'
-            print("qqq")
-    except Exception as ex:
-        data['error']=str(ex)
-    return JsonResponse(data,safe=False)
-
-class ProveedorDeleteView(DeleteView):
-    model=Proveedores
+class TipoProductoDeleteView(DeleteView):
+    model=TipoProducto
     #template_name='cliente/EliminarCliente.html'
-    success_url=reverse_lazy('proveedores:proveedores')
+    success_url=reverse_lazy('tipoproductos:tipoproducto')
 
     def dispatch(self, request, *args, **kwargs):
         self.object=self.get_object()
@@ -133,13 +108,3 @@ class ProveedorDeleteView(DeleteView):
         #context['idcom'] =  "object.pk"
         return context
 
-
-def cargar_proveedores(request):   
-   return render(
-        request,
-        'projecto/MostrarProveedores.html'
-    )
-
-def addnew(request):  
-    
-    return render(request,'projecto/CrearProveedor.html',) 

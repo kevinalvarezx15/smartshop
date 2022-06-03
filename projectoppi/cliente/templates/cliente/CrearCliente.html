@@ -170,10 +170,18 @@ $(function (){
   var options = '<option value="">---------</option>'; 
   onChageTipopersona();
   onChageDepartamento();
+  if('{{mode}}'=="edit"){
+    var docuid = document.getElementById('id_documento');    
+    docuid.disabled = true;
+  }
+  
+  
 
   $('form').on('submit', function(e){
     e.preventDefault();
-    var parameters=$(this).serializeArray();
+    var docuid = document.getElementById('id_documento');    
+    docuid.disabled = false;
+    var parameters=$(this).serializeArray();    
     debugger
     $.ajax({
       
