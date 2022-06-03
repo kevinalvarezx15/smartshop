@@ -13,6 +13,11 @@ class ProvedoresListView(ListView):
     model=Proveedores
     template_name='proveedores/MostrarProveedor.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de proveedores'
@@ -77,6 +82,7 @@ class ProveedoresUpdateView(UpdateView):
         idcon=self.kwargs.get('pk')
         context['url'] = reverse_lazy('proveedores:EditarProveedor',kwargs={'pk': idcon})
         context['idcom'] =  "object.pk"
+        context['mode']="edit"
         return context
 
     

@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'cliente.apps.ClienteConfig',
     'proveedores.apps.ProveedoresConfig',
     'productos.apps.ProductosConfig',
+    'tipoProducto.apps.TipoproductoConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,5 +145,9 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/proveedores/'
+
+AUTH_USER_MODEL="user.User"
 
 django_heroku.settings(locals())

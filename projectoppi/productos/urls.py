@@ -4,10 +4,11 @@ from . import views
 
 app_name = 'productos'
 urlpatterns =[
-    path('',views.TipoProductoListView.as_view(), name='tipoproducto'),
-    path('Crear/',views.TipoProductoCreateView.as_view(), name='crearTipoproducto'),
-    path('Editar/<int:pk>',views.TipoProductoUpdateView.as_view(), name='EditarTipoproducto'),
-    path('Eliminar/<int:pk>',views.TipoProductoDeleteView.as_view(), name='EliminarTipoproducto'),
+    path('',views.ProductoListView.as_view(), name='producto'),
+    path('CrearProducto/',views.ProductoCreateView.as_view(), name='crearProducto'),
+    path('EditarProducto/<int:pk>',views.ProductoUpdateView.as_view(), name='EditarProducto'),
+    path('EliminarProducto/<int:pk>',views.ProductoDeleteView.as_view(), name='EliminarProducto'),
+
     
 ]
 

@@ -1,0 +1,30 @@
+{% extends 'list.html' %}
+ 
+{% block botones %}
+  <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+    <button onclick="openPopup('{% url 'tipoproductos:crearTipoproducto' %}')" class="btn btn-primary">Crear</button>  
+    <button onclick="openEdit('{% url 'tipoproductos:EditarTipoproducto' 0  %}')" class="btn btn-primary">Modificar</button>
+    <button onclick="deleteRegister('{% url 'tipoproductos:EliminarTipoproducto' 0  %}','/tipoproductos/')" class="btn btn-primary">Eliminar</button>
+    <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
+  </div>
+{% endblock %}
+
+{% block columns %}
+  <tr>
+    <th>Codigo</th>
+    <th>Nombre</th>
+    <th>Descripcion</th>
+    
+  </tr>
+{% endblock %}
+                
+{% block rows %}
+  {% for obj in object_list %}
+    <tr>
+      <td>{{ obj.id }}</td>
+      <td>{{ obj.nombre }}</td>
+      <td>{{ obj.descripcion}}</td>
+    </tr>
+  {% endfor %}
+
+{% endblock %}

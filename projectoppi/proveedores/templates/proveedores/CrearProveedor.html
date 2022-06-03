@@ -157,10 +157,16 @@
     })
     var options = '<option value="">---------</option>'; 
     onChagePais();
+    if('{{mode}}'=="edit"){
+     var docuid = document.getElementById('id_documento');    
+     docuid.disabled = true;
+    }  
     //onChageDepartamento();
       
     $('form').on('submit', function(e){
       e.preventDefault();
+      var docuid = document.getElementById('id_documento');    
+      docuid.disabled = false;
       var parameters=$(this).serializeArray();
       debugger
       $.ajax({

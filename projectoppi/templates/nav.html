@@ -22,8 +22,8 @@
               Productos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'productos:tipoproducto' %}">Producto</a>
-              <a class="dropdown-item" href="{% url 'productos:tipoproducto' %}">Tipo producto</a>
+              <a class="dropdown-item" href="{% url 'productos:producto' %}">Producto</a>
+              <a class="dropdown-item" href="{% url 'tipoproductos:tipoproducto' %}">Tipo producto</a>
             </div>
         </li>
         <li class="nav-item active">
@@ -40,6 +40,17 @@
           </li>
         
       </ul>
+              
+      <a class="nav-link" href="#" style="color: white;">
+        <i class="bi bi-person-circle" style='color: white'></i>  {{request.user.username}}
+      </a>
+      
+      <span class="navbar-text">
+        
+        <a class="btn btn-primary" href="{% url 'logout' %}" role="button">
+          <span class='bi bi-box-arrow-in-right' style='color: white'></span>
+        </a>
+      </span>
     </div>
   </div>
 </nav>

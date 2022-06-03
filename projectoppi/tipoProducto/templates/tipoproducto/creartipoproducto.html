@@ -1,0 +1,79 @@
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tipo productos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form_creacion"  method="POST" action={{url}}> 
+          {% csrf_token %}
+          {{form.errors}}
+         <div class="container">  
+            <div class="form-group row">   
+              <label class="col-sm-2 col-form-label">{{form.nombre.label}}</label>  
+              <div class="col-sm-9">  
+                {{form.nombre}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">{{form.descripcion.label}}</label>  
+              <div class="col-sm-9">  
+                {{form.descripcion}}
+              </div> 
+            </div>
+            
+            
+         </div>
+         <div class="modal-footer">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>  
+        </form> 
+      </div>
+  </div>
+</div>
+<script>
+
+
+
+$(function (){
+
+
+  $('form').on('submit', function(e){
+    e.preventDefault();
+    var parameters=$(this).serializeArray();
+    debugger
+    $.ajax({
+      
+      url:'{{url}}',
+      type:'POST',
+      data:parameters,
+      dataType:'json'      
+    }).done(function(data){
+      if(!data.hasOwnProperty('error')){
+        Swal.fire({
+          text:'El registro ha sido almacenado correctamente',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+        })
+        window.location='/tipoproductos/';
+        //location.href('/cliente/');
+        // location.
+        return false;
+      }
+      message_error(data.error);
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert(textStatus + ': ' + errorThrown);
+    }).always(function (data) {
+    });
+
+  })
+
+});  
+</script>
+
+
+
+
+
