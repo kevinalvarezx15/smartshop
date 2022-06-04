@@ -2,9 +2,9 @@
  
 {% block botones %}
   <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
-    <button onclick="openPopup('{% url 'productos:crearTipoproducto' %}')" class="btn btn-primary">Crear</button>  
-    <button onclick="openEdit('{% url 'productos:EditarTipoproducto' 0  %}')" class="btn btn-primary">Modificar</button>
-    <button onclick="deleteRegister('{% url 'productos:EliminarTipoproducto' 0  %}','/cliente/')" class="btn btn-primary">Eliminar</button>
+    <button onclick="openPopup('{% url 'productos:crearProducto' %}')" class="btn btn-primary">Crear</button>  
+    <button onclick="openEdit('{% url 'productos:EditarProducto' 0  %}')" class="btn btn-primary">Modificar</button>
+    <button onclick="deleteRegister('{% url 'productos:EliminarProducto' 0  %}','/productos/')" class="btn btn-primary">Eliminar</button>
     <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
   </div>
 {% endblock %}
@@ -12,6 +12,7 @@
 {% block columns %}
   <tr>
     <th>Codigo</th>
+    <th>Tipo producto</th>
     <th>Nombre</th>
     <th>Descripcion</th>
     
@@ -22,6 +23,7 @@
   {% for obj in object_list %}
     <tr>
       <td>{{ obj.id }}</td>
+      <td>{{ obj.tipoProducto }}</td>
       <td>{{ obj.nombre }}</td>
       <td>{{ obj.descripcion}}</td>
     </tr>

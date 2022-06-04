@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'cliente.apps.ClienteConfig',
     'proveedores.apps.ProveedoresConfig',
     'productos.apps.ProductosConfig',
+    'tipoProducto.apps.TipoproductoConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -154,5 +156,7 @@ EMAIL_HOST_USER = "kevin.alvarez@controlmovil.net"
 EMAIL_HOST_PASSWORD = "Prueba2020"
 
 LOGIN_URL = '/proveedores/'
+
+AUTH_USER_MODEL="user.User"
 
 django_heroku.settings(locals())

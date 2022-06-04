@@ -48,6 +48,11 @@ class ClientesCreateView(CreateView):
         form_class=ClienteForm
         template_name='cliente/CrearCliente.html'
         success_url=reverse_lazy('cliente:cliente')
+        
+        def dispatch(self, request, *args, **kwargs):
+            if not request.user.is_authenticated:
+                return redirect('login')
+            return super().dispatch(request, *args, **kwargs)
 
         def post(self,request,*args,**kwargs):
             data={}
@@ -101,6 +106,7 @@ class ClienteUpdateView(UpdateView):
     template_name='cliente/CrearCliente.html'
     success_url=reverse_lazy('cliente:cliente')
 
+
     def dispatch(self, request, *args, **kwargs):
         self.object=self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -123,6 +129,7 @@ class ClienteUpdateView(UpdateView):
         context=super().get_context_data(**kwargs)
         idcon=self.kwargs.get('pk')
         context['url'] = reverse_lazy('cliente:EditarCliente',kwargs={'pk': idcon})
+        context['mode']="edit"
         context['idcom'] =  "object.pk"
         return context
 
