@@ -142,7 +142,16 @@ STATICFILES_FINDERS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+
+#CONFIGURACION DEL EMAIL 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "kevin.alvarez@controlmovil.net"
+EMAIL_HOST_PASSWORD = "Prueba2020"
 
 LOGIN_URL = '/proveedores/'
 
