@@ -1,0 +1,9 @@
+{% extends "users/base.html" %}
+{% block head_content %}
+<title>Confirmación reset </title>
+{% endblock%}
+{% block container %}
+<h1> Restablecimiento de contraseña completado </h1>
+<p> Su contraseña ha sido establecida. Ahora puede seguir adelante e iniciar sesión. </p>
+<a href="{% url 'login' %}"> Iniciar sesión </a>
+{% endblock %}
