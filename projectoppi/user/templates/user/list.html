@@ -1,0 +1,30 @@
+{% extends 'list.html' %}
+
+{% block columns %}
+    <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Nombre usuario</th>
+        <th scope="col">Correo</th>   
+        <th scope="col">Fecha registro</th>     
+        <th scope="col">Fecha ultimo ingreso</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+  {% for obj in object_list %}
+    <tr>
+      <td>{{ obj.id }}</td>
+      <td>{{ obj.first_name }}</td>
+      <td>{{ obj.last_name }}</td>
+      <td>{{ obj.username }}</td>
+      <td>{{ obj.email }}</td>
+      <td>{{ obj.date_joined }}</td>
+      <td>{{ obj.last_login }}</td>      
+    </tr>
+  {% endfor %}
+
+{% endblock %}
+
+
