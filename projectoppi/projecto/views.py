@@ -45,6 +45,14 @@ def cargar_registro(request):
         'projecto/registro.html'
     )
 
+
+
+def reset_passw(request):   
+   return render(
+        request,
+        'projecto/resetpassword.html'
+    )
+
 class LogoutRedirectView(RedirectView):
     pattern_name='login'
 
