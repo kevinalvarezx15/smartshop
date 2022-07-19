@@ -20,8 +20,7 @@ class User(AbstractUser):
     def __str__(self) -> str:
         return self.last_login.strftime("%Y")
         
-    class Meta:
-        
+    class Meta:        
         db_table="auth_user"
 
    

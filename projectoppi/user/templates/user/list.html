@@ -1,5 +1,13 @@
 {% extends 'list.html' %}
 
+{% block botones %}
+  <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+    <button onclick="openPopup('{% url 'user:crearUser' %}')" class="btn btn-primary">Crear</button>  
+    <button onclick="openEdit('{% url 'user:EditarUser' 0  %}')" class="btn btn-primary">Modificar</button>
+    <button onclick="deleteRegister('{% url 'user:EliminarUser' 0  %}','/user/')" class="btn btn-primary">Eliminar</button>
+    <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
+  </div>
+{% endblock %}
 {% block columns %}
     <tr>
         <th scope="col">Codigo</th>
@@ -7,8 +15,6 @@
         <th scope="col">Apellidos</th>
         <th scope="col">Nombre usuario</th>
         <th scope="col">Correo</th>   
-        <th scope="col">Fecha registro</th>     
-        <th scope="col">Fecha ultimo ingreso</th>
     </tr>
 {% endblock %}
 
@@ -19,12 +25,11 @@
       <td>{{ obj.first_name }}</td>
       <td>{{ obj.last_name }}</td>
       <td>{{ obj.username }}</td>
-      <td>{{ obj.email }}</td>
-      <td>{{ obj.date_joined }}</td>
-      <td>{{ obj.last_login }}</td>      
+      <td>{{ obj.email }}</td>     
     </tr>
   {% endfor %}
 
 {% endblock %}
+
 
 

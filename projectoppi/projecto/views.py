@@ -1,5 +1,5 @@
 from ast import pattern
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout,get_user_model
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
@@ -28,6 +28,7 @@ def cargar_login(request):
 
 def cargar_registro(request):
     if request.method=='POST':
+        User = get_user_model()
         username = request.POST['username']
         password = request.POST['password']
         try:

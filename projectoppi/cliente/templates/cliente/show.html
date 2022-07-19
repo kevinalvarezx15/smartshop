@@ -2,7 +2,7 @@
  
 {% block botones %}
   <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
-    <button onclick="openPopup('{% url 'cliente:crearCliente' %}')" class="btn btn-primary">Creaxr</button>  
+    <button onclick="openPopup('{% url 'cliente:crearCliente' %}')" class="btn btn-primary">Crear</button>  
     <button onclick="openEdit('{% url 'cliente:EditarCliente' 0  %}')" class="btn btn-primary">Modificar</button>
     <button onclick="deleteRegister('{% url 'cliente:EliminarCliente' 0  %}','/cliente/')" class="btn btn-primary">Eliminar</button>
     <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
