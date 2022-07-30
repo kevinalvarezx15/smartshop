@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'inventario.apps.InventarioConfig',
     'user.apps.UserConfig',
     'compra.apps.CompraConfig',
+    'ventas.apps.VentasConfig',
 ]
 
 MIDDLEWARE = [
@@ -155,7 +156,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "kevin.alvarez@controlmovil.net"
-EMAIL_HOST_PASSWORD = "Prueba2020"
+EMAIL_HOST_PASSWORD = "Medellin2022#"
 
 LOGIN_URL = '/proveedores/'
 

@@ -56,6 +56,13 @@ class ProductoForm(ModelForm):
                 'rows':4, 'cols':40
             }
         ),
+        'precio_venta':TextInput(
+            attrs={
+                'placeholder': 'Ingrese el valor del producto',
+                'class':'form-control',
+
+            }
+        )
         }
     tipoProducto = ModelChoiceField(queryset=TipoProducto.objects.all(),label="Tipo producto",widget=Select(
         attrs={'class':'form-control select2',

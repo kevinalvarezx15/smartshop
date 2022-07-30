@@ -27,10 +27,10 @@
             </div>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">Compras <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'compra:compra' %}">Compras <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">Ventas <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="% url 'ventas:ventas' %">Ventas <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'inventario:inventarioV' %}">Inventario <span class="sr-only">(current)</span></a>
@@ -44,7 +44,21 @@
           </li>
         
       </ul>
-    <div class="listas">       
+
+      <a class="nav-link" href="#" style="color: white;">
+        <i class="bi bi-person-circle" style='color: white'></i>  {{request.user.username}}
+      </a>
+
+      <span class="navbar-text">
+
+        <a class="btn btn-primary" href="{% url 'logout' %}" role="button">
+          <span class='bi bi-box-arrow-in-right' style='color: white'></span>
+        </a>
+      </span>
+    </div>
+  </div>
+</nav>
+    <!--<div class="listas">       
         <a class="nav-link" data-toggle="dropdown" href="#" style="color: white;">
         <i class="bi bi-person-circle" style='color: white' ></i> {{ request.user.username }}
         </a>
@@ -55,15 +69,17 @@
                 Sú último acceso fue {{ request.user.last_login }}
             </span>
             
-            <div class="dropdown-divider"></div>
-            <a href="{% url 'user_change_password' %}" class="dropdown-item">
+           <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
                 <i class=""></i> Editar password
                 <span class="float-right text-muted text-sm">12 hours</span>
             </a>
+
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">
                 <p>Este sistema te permitira realizar diferentes actividades</p>
             </a>
+          
         </div>
       </li>
     </div> 
@@ -77,3 +93,6 @@
     </div>
   </div>
 </nav>
+-->
+
+
