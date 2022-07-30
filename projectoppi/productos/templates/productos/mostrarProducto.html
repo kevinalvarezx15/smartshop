@@ -18,6 +18,7 @@
     <th>Tipo producto</th>
     <th>Nombre</th>
     <th>Descripcion</th>
+    <th> Valor </th>
     
   </tr>
 {% endblock %}
@@ -29,6 +30,7 @@
       <td>{{ obj.tipoProducto }}</td>
       <td>{{ obj.nombre }}</td>
       <td>{{ obj.descripcion}}</td>
+      <td>{{obj.precio_venta}}</td>
     </tr>
   {% endfor %}
 
