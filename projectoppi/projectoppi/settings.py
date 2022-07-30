@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'proveedores.apps.ProveedoresConfig',
     'productos.apps.ProductosConfig',
     'tipoProducto.apps.TipoproductoConfig',
+    'inventario.apps.InventarioConfig',
     'user.apps.UserConfig',
 ]
 
