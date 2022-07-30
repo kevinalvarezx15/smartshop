@@ -46,7 +46,7 @@ class ClientesCreateView(CreateView):
     try:
         model=Clientes
         form_class=ClienteForm
-        template_name='cliente/CrearCliente.html'
+        template_name='compra/create.html'
         success_url=reverse_lazy('cliente:cliente')
         
         def dispatch(self, request, *args, **kwargs):
@@ -72,7 +72,7 @@ class ClientesCreateView(CreateView):
         def get_context_data(self, **kwargs):
             context=super().get_context_data(**kwargs)
             context['url'] = reverse_lazy('cliente:crearCliente')
-            print("hello")
+            print(reverse_lazy('cliente:crearCliente'))
             return context
     except Exception as ex:
         print(ex)
