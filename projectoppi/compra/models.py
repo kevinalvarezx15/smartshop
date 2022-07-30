@@ -26,8 +26,7 @@ class Compra(models.Model):
     dateUpdate=models.DateField(null=True,blank=True, verbose_name='Fecha actualización',default=datetime.now)   
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
 
-    def __str__(self):
-        return self.proveedor.nombres
+
 
     def toJSON(self):
         item = model_to_dict(self)
@@ -47,6 +46,13 @@ class DetalleCompra(models.Model):
     cantidad=models.IntegerField(default=0,verbose_name='Cantidad')
     precioCompra=models.DecimalField(default=0.00,max_digits=9, decimal_places=2,verbose_name='Precio compra')    
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+
+    def toJSON(self):
+        item = model_to_dict(self, exclude=['compra'])
+        item['producto'] = self.producto.toJSON()
+        item['precioCompra'] = format(self.precioCompra, '.2f')
+        item['subtotal'] = format(self.subtotal, '.2f')
+        return item
     
     class Meta:
         db_table="tblDetalleCompra"
