@@ -1,5 +1,8 @@
 {% extends 'list.html' %}
-
+{% load static %}
+{% block head_list %}
+    <script src="{% static '/js/listUser.js' %}"></script>
+{% endblock %} 
 {% block botones %}
   <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
     <button onclick="openPopup('{% url 'user:crearUser' %}')" class="btn btn-primary">Crear</button>  

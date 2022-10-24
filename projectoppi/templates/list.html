@@ -133,6 +133,32 @@
        
     }
 
+    function openModelEdit(dataurl){
+        var table = $("#example").DataTable();
+        if(table.rows('.selected').data().length>0){
+            var pk = table.rows('.selected').data()[0];
+
+            var dataurl=dataurl
+            var url=dataurl.replace('0',pk.Compra_Id)
+            $('#edicion').load(url,function(){
+            $('#edicion').modal('show');
+            });
+            
+        }else{
+            Swal.fire({
+            text:'Primero debe seleccionar el registro que desea editar',
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            })    
+        }
+       
+    }
+
+
+
 
 </script>
+{% block extrajsmodel %}
+
+{% endblock extrajsmodel %}
 {% endblock extrajs %}

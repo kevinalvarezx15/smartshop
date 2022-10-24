@@ -1,0 +1,103 @@
+<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ventas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {% block content %}
+                <form method="post">
+                    <div class="card card-primary">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card card-secondary">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="bi  bi-boxes"></i> Detalle de productos</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Buscador de productos:</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="search"
+                                                        placeholder="Ingrese una descripción de producto" autocomplete="off">
+                                                    <span class="input-group-append">
+                                                    <button type="button" class="btn btn-danger btn-flat bi bi-x"><i
+                                                            class="fas fa-times"></i></button>
+                                                </span>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <button type="button" class="btn btn-danger btn-xs btnRemoveAll">
+                                                <i class="bi bi-trash-fill"></i> Eliminar todos mis items
+                                            </button>
+                                            <hr>
+                                            <table class="table table-bordered" id="tblProductos">
+                                                <thead>
+                                                <tr>
+                                                    <th>Eliminar</th>
+                                                    <th>Producto</th>
+                                                    <th>Categoría</th>
+                                                    <th>Precio venta</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-secondary">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="bi bi-cart-fill"></i> Datos de la factura</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <input type="hidden" name="action" value="{{ action }}">
+                                            <div class="form-group">
+                                                <label>Fecha de venta:</label>
+                                                {{ form.fechaVenta }}
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cliente:</label>
+                                                {{ form.cliente }}
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Estado venta:</label>
+                                                {{ form.estadoVenta }}
+                                                
+                                            </div>
+                                            
+                                                                                        
+                                            <div class="form-group">
+                                                <label>Total venta:</label>
+                                                {{ form.total }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-flat">
+                                <i class="fas fa-save"></i> Guardar registro
+                            </button>
+                           
+                        </div>
+                    </div>
+                </form>
+            {% endblock %}
+          
+        </div>
+    </div>
+  </div>
+
+  {% load static %}
+  {% block head_list %}
+      <script src="{% static '/js/formulario.js' %}"></script>
+  {% endblock %}

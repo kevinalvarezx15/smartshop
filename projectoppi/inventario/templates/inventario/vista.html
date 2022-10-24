@@ -1,0 +1,37 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script src="{% static '/js/listInv.js' %}"></script>
+{% endblock %}
+
+{% block botones %}
+  <div style="position: absolute; z-index: 1; right: 10px; top: 95px;" >
+    <button onclick="openBuscar()" class="btn btn-primary">Buscar</button>
+  </div>
+{% endblock %}
+
+{% block columns %}
+  <tr>
+    <th>Nro</th>
+    <th>Nombre</th>
+    <th>Categoria</th>
+    <th>Precio venta</th>
+    <th>Stock</th>
+
+  </tr>
+{% endblock %}
+                
+{% block rows %}
+  {% for obj in object_list %}
+  <tr>
+    <td>{{ obj.id }}</td>
+    <td>{{ obj.nombre }}</td>
+    <td>{{ obj.tipoProducto }}</td>
+    <td>{{ obj.precio_venta}}</td>
+    <td>{{ obj.cantidad}}</td>
+  </tr>
+  {% endfor %}
+  
+
+{% endblock %}
+
