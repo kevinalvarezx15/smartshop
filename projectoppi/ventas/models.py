@@ -30,8 +30,8 @@ class Venta(models.Model):
     
     def toJSON(self):
         item = model_to_dict(self)
-        item['proveedor'] = self.proveedor.nombres
-        item['estadoVenta'] = self.estadoventa.nombre
+        item['cliente'] = self.cliente.nombres
+        item['estadoVenta'] = self.estadoVenta.nombre
         item['total'] = format(self.total, '.2f')
         item['fechaVenta'] = self.fechaVenta.strftime('%Y-%m-%d')
         return item
@@ -46,6 +46,13 @@ class DetalleVenta(models.Model):
     cantidad=models.IntegerField(default=0,verbose_name='Cantidad')
     precioVenta=models.DecimalField(default=0.00,max_digits=9, decimal_places=2,verbose_name='Precio compra')    
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+
+    def toJSON(self):
+        item = model_to_dict(self, exclude=['venta'])
+        item['producto'] = self.producto.toJSON()
+        item['precioVenta'] = format(self.precioVenta, '.2f')
+        item['subtotal'] = format(self.subtotal, '.2f')
+        return item
     
     class Meta:
         db_table="tblDetalleVenta"

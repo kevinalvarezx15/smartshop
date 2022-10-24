@@ -183,8 +183,9 @@ class CompraUpdateView(UpdateView):
 
 
     def get_context_data(self, **kwargs):
-            context=super().get_context_data(**kwargs)
-            context['url'] = reverse_lazy('compra:crearCompra')
-            context['action'] = 'edit'
-            return context
+        print('updated')
+        context=super().get_context_data(**kwargs)
+        context['url'] = reverse_lazy('compra:crearCompra')
+        context['action'] = 'edit'
+        return context
 

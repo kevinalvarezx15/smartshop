@@ -51,7 +51,7 @@ var ventas = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '<input type="number" id name="precio_venta" onchange="setTwoNumberDecimal()" step="0.01" class="form-control currency" autocomplete="off" value="' + row.precio_venta + '">';
+                        return '$' + parseFloat(data).toFixed(2);
                     }
                 },
                 {
@@ -141,7 +141,6 @@ $(function () {
         select: function (event, ui) {
             event.preventDefault();
             console.clear();
-            ui.item.precio_venta = 1000.00;
             ui.item.cantidad = 1;
             ui.item.subtotal = 0.00;
             console.log(ventas.items);
@@ -172,7 +171,7 @@ $(function () {
             var tr = tblProductos.cell($(this).closest('td, li')).index();
             ventas.items.productos[tr.row].cantidad = cantidad;
             ventas.calculate_invoice();
-            $('td:eq(5)', tblProductos.row(tr.row).node()).html('$' + compras.items.productos[tr.row].subtotal.toFixed(2));
+            $('td:eq(5)', tblProductos.row(tr.row).node()).html('$' + ventas.items.productos[tr.row].subtotal.toFixed(2));
             
         })
         .on('click', 'a[rel="remove"]', function () {
@@ -217,7 +216,7 @@ $(function () {
               type:'POST',
               data: {
                 'action': $('input[name="action"]').val(),
-                'ventas': JSON.stringify(compras.items)
+                'ventas': JSON.stringify(ventas.items)
                 },
               dataType:'json'      
             }).done(function(data){

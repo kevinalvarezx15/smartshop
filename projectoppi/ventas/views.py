@@ -30,14 +30,16 @@ class VentaListView(ListView):
         data = {}
         try:
             action = request.POST['action']
-            print('hola')
             if action == 'searchdata':
-                print('Entra buscar')
                 data = []
                 for i in Venta.objects.all():
                     data.append(i.toJSON())
-                print('Finaliza ciclo')
                 print(data)
+            elif action == 'search_details_prod':
+                print('ingresa')
+                data = []
+                for i in DetalleVenta.objects.filter(venta_id=request.POST['Venta_Id']):
+                    data.append(i.toJSON())
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
@@ -63,7 +65,6 @@ class VentaCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print('prid')
         data = {}
         try:
             action = request.POST['action']
@@ -71,23 +72,33 @@ class VentaCreateView(CreateView):
                 data = []
                 prods = Productos.objects.filter(nombre__icontains=request.POST['term'])[0:10]
                 for i in prods:
-                    print('prid')
                     item = i.toJSON()
                     item['value'] = i.nombre
                     data.append(item)
             elif action == 'add':
                 with transaction.atomic():
-                    ventas = json.loads(request.POST['ventas'])
-                    print(ventas)
+                    venta = json.loads(request.POST['ventas'])
+                    print(venta)
                     
                     ventas = Venta()
-                    ventas.fechaVenta = ventas['fechaVenta']
+                    ventas.fechaVenta = datetime.now()
                     ventas.dateUpdate=datetime.now()
-                    ventas.proveedor_id =ventas['proveedor']
-                    ventas.estadoVenta_id = float(ventas['estadoVenta'])
-                    ventas.total = float(ventas['total'])
+                    ventas.cliente_id =venta['cliente']
+                    ventas.estadoVenta_id = venta['estadoVenta']
+                    ventas.total = float(venta['total'])
                     ventas.save()
-                    for i in ventas['productos']:
+                    for i in venta['productos']:
+                        prod=Productos()
+                        prods = Productos.objects.filter(id=i['id'])
+                        for k in prods:
+                            prod.id=i['id']
+                            prod.nombre=k.nombre
+                            prod.descripcion=k.descripcion
+                            prod.tipoProducto_id=k.tipoProducto_id
+                            prod.cantidad=int(k.cantidad)-int(i['cantidad'])
+                            prod.precio_venta=float(k.precio_venta)
+                        prod.save()
+
                         det = DetalleVenta()
                         det.venta_id = ventas.Venta_Id
                         det.producto_id = i['id']
@@ -100,5 +111,11 @@ class VentaCreateView(CreateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['url'] = reverse_lazy('ventas:crearVenta')
+        context['action'] = 'add'
+        return context
 
 # Create your views here.
