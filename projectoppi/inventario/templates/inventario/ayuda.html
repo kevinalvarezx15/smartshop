@@ -1,0 +1,27 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+    <script src="{% static '/js/listProv.js' %}"></script>
+{% endblock %}  
+{% block columns %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="init.css">
+    </head>
+    <body style="background-color:azure;">
+        <h1 style="text-align: center;"> Ayuda </h1>
+        
+        <img class="imagen" src="https://us.123rf.com/450wm/martialred/martialred1507/martialred150700747/42614020-icono-plana-pregunta-ayuda-de-aplicaciones-y-sitios-web.jpg?ver=6" align="center" width="250px" height="250px" alt=""/>
+        <p> Aqui encontraras información sobre manuales de ayuda de usuarios </p>
+        <p> A continuación encontraras el link de descarga del manual de usuario</p>
+        <a href="https://drive.google.com/file/d/1bmtPONfxKxR_5nrBG5IlVSkFNN9EROif/view?usp=share_link" target="\_blank">Haga click para descargar</a>
+
+
+    </body>
+
+</html>
+
+{% endblock %}
